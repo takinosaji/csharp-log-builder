@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogBuilder", "LogBuilder\LogBuilder.csproj", "{1E0B8049-ABE4-4E0F-A0AC-7AF32632D336}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogBuilder.Tests", "LogBuilder.Tests\LogBuilder.Tests.csproj", "{8228482D-673A-4BBD-B4CA-F120A4BAAED6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{1E0B8049-ABE4-4E0F-A0AC-7AF32632D336}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E0B8049-ABE4-4E0F-A0AC-7AF32632D336}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E0B8049-ABE4-4E0F-A0AC-7AF32632D336}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8228482D-673A-4BBD-B4CA-F120A4BAAED6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8228482D-673A-4BBD-B4CA-F120A4BAAED6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8228482D-673A-4BBD-B4CA-F120A4BAAED6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8228482D-673A-4BBD-B4CA-F120A4BAAED6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

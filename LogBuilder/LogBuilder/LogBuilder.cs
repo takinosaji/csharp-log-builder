@@ -22,7 +22,7 @@ namespace LogBuilder
             AppendProperties(logProperties);
         }
         
-        public static Func<LogBuilder, Exception, string> Formatter { get; } =
+        public static Func<LogBuilder, Exception?, string> Formatter { get; } =
             (l, e) => l._message;
         
         public LogBuilder WithProperties(params (string name, object value)[] logArgs)

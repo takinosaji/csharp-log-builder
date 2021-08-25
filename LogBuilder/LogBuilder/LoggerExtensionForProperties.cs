@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace LogBuilder
 {
-    public static class LoggerExtensions
+    public static partial class LoggerExtensions
     {
         public static void LogInformationWith(
             this ILogger logger,
@@ -54,16 +54,7 @@ namespace LogBuilder
             LogLevel level,
             string message,
             Exception? exception,
-            params (string key, object value)[] properties)
-        {
+            params (string key, object value)[] properties) =>
             logger.LogWithBuilder(level, exception, new LogBuilder(message, properties));
-        }
-
-        public static void LogWithBuilder(
-            this ILogger logger,
-            LogLevel level,
-            Exception? exception,
-            LogBuilder logBuilder) =>
-            logger.Log(level, default, logBuilder, exception, LogBuilder.Formatter);
     }
 }
