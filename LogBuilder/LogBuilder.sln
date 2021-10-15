@@ -4,6 +4,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogBuilder", "LogBuilder\Lo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogBuilder.Tests", "LogBuilder.Tests\LogBuilder.Tests.csproj", "{8228482D-673A-4BBD-B4CA-F120A4BAAED6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{BD4EE830-D0E2-4A2A-91D6-D5C29D109002}"
+ProjectSection(SolutionItems) = preProject
+	..\README.md = ..\README.md
+	..\CHANGELOG.md = ..\CHANGELOG.md
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -30,16 +30,16 @@ namespace LogBuilder.Tests
             public void ShouldReturnExpectedMessageAndLogArgs_WhenBothAreProvided()
             {
                 //Arrange
-                var inputLogs = (fieldName: "fieldName", fieldValue: "fieldValue");
+                var inputLogs = new LogProperty("fieldName", "fieldValue");
                 const string inputMessage = "test message";
-                var expectedLogArgs = new List<KeyValuePair<string, object>>
+                var expectedLogArgs = new List<LogProperty>
                 {
-                    new (inputLogs.fieldName, inputLogs.fieldValue)
+                    new (inputLogs.Key, inputLogs.Value)
                 };
 
                 //Act
                 var builder = new LogBuilder(inputMessage, inputLogs);
-                var logArgs = builder.ToList();
+                var logArgs = builder.GetLogPropertiesIterator();
 
                 //Assert
                 inputMessage.Should().Be(LogBuilder.Formatter(builder, new Exception()));
@@ -66,17 +66,17 @@ namespace LogBuilder.Tests
             public void ShouldReturnExpectedLogArgs_WhenWithArgsInvoked()
             {
                 //Arrange
-                var inputLogs = (fieldName: "fieldName", fieldValue: "fieldValue");
+                var inputLogs = new LogProperty("fieldName", "fieldValue");
                 const string inputMessage = "test message";
                 var builder = new LogBuilder(inputMessage);
-                var expectedLogArgs = new List<KeyValuePair<string, object>>
+                var expectedLogArgs = new List<LogProperty>
                 {
-                    new (inputLogs.fieldName, inputLogs.fieldValue)
+                    new (inputLogs.Key, inputLogs.Value)
                 };
 
                 //Act
                 var result = builder.WithProperties(inputLogs);
-                var logArgs = result.ToList();
+                var logArgs = result.GetLogPropertiesIterator();
 
                 //Assert
                 expectedLogArgs.Should().Equal(logArgs);
