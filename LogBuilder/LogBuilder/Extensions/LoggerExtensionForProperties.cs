@@ -56,7 +56,7 @@ namespace LogBuilder.Extensions
             string message,
             Exception? exception,
             IEnumerable<LogProperty> properties) =>
-            logger.LogWithBuilder(level, exception, new LogBuilder(message, properties));
+            logger.LogWithBuilder(level, new LogBuilder(message, exception, properties));
         
         public static void LogWithProperties(
             this ILogger logger,
@@ -64,6 +64,6 @@ namespace LogBuilder.Extensions
             string message,
             Exception? exception,
             params LogProperty[] properties) =>
-            logger.LogWithBuilder(level, exception, new LogBuilder(message, properties));
+            logger.LogWithBuilder(level, new LogBuilder(message, exception, properties));
     }
 }

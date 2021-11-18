@@ -7,36 +7,46 @@ namespace LogBuilder
 {
     public class LogBuilder : IEnumerable<KeyValuePair<string, object>>
     {    
-        private readonly List<LogProperty> _logProperties = new();
+        private readonly List<LogProperty> _properties = new();
         
-        private string _message { get; }
+        private string _message { get; init; }
+        
+        public Exception Exception { get; init; }
         
         public LogBuilder(string message)
+            : this(message, (Exception) null)
         {
-            _message = message;
         }
         
-        public LogBuilder(string message, params LogProperty[] logProperties)
+        public LogBuilder(string message, Exception exception)
+            : this(message, exception, null)
         {
-            _message = message;
-            AppendProperties(logProperties);
         }
         
         public LogBuilder(string message, IEnumerable<LogProperty> logProperties)
+            : this(message, null, logProperties)
         {
-            _message = message;
-            AppendProperties(logProperties);
         }
         
-        public IEnumerable<LogProperty> GetLogPropertiesIterator()
+        public LogBuilder(string message, params LogProperty[] logProperties)
+            : this(message, null, logProperties)
         {
-            foreach (var property in _logProperties)
-            {
-                yield return property;
-            }
         }
-
-        public IReadOnlyCollection<LogProperty> GetLogProperties() => _logProperties;
+        
+        public LogBuilder(string message, Exception exception, params LogProperty[] logProperties)
+            : this(message, exception, (IEnumerable<LogProperty>)logProperties)
+        {
+        }
+        
+        public LogBuilder(string message, Exception exception, IEnumerable<LogProperty> logProperties)
+        {
+            _message = message;
+            Exception = exception;
+            
+            AppendProperties(logProperties);
+        }
+      
+        public IReadOnlyCollection<LogProperty> GetLogProperties() => _properties.AsReadOnly();
         
         public static Func<LogBuilder, Exception, string> Formatter { get; } =
             (l, e) => l.ToString();
@@ -48,12 +58,19 @@ namespace LogBuilder
             AppendProperties(logArgs);
             return this;
         }
-        
-        private void AppendProperties(IEnumerable<LogProperty> logArgs) =>
-            _logProperties.AddRange(logArgs);
+
+        private void AppendProperties(IEnumerable<LogProperty> logArgs)
+        {
+            if (logArgs == null || !logArgs.Any())
+            {
+                return;
+            }
+            
+            _properties.AddRange(logArgs);
+        }
 
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() =>
-            _logProperties.Select(p => (KeyValuePair<string, object>)p).GetEnumerator();
+            _properties.Select(p => (KeyValuePair<string, object>)p).GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }

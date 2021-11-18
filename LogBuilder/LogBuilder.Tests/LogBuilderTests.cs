@@ -39,7 +39,7 @@ namespace LogBuilder.Tests
 
                 //Act
                 var builder = new LogBuilder(inputMessage, inputLogs);
-                var logArgs = builder.GetLogPropertiesIterator();
+                var logArgs = builder.GetLogProperties();
 
                 //Assert
                 inputMessage.Should().Be(LogBuilder.Formatter(builder, new Exception()));
@@ -76,7 +76,7 @@ namespace LogBuilder.Tests
 
                 //Act
                 var result = builder.WithProperties(inputLogs);
-                var logArgs = result.GetLogPropertiesIterator();
+                var logArgs = result.GetLogProperties();
 
                 //Assert
                 expectedLogArgs.Should().Equal(logArgs);
